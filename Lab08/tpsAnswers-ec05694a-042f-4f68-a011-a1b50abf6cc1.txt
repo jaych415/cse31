@@ -1,0 +1,26 @@
+Activity #1:
+1. This was done.
+2. This was done.
+3. This was done.
+4. li $v0, 5
+   syscall
+   add $t3, $0, $v0
+5. No, didn't need the declaration for n, nor the la and lw commands. 
+6. This was done.
+
+Activity #2:
+1. When 5 is entered, the output is 29. I believe this can be verified by everyone else's answer to this question. 
+2. This was done.
+3. This was done.
+4. Register $a0.
+5. I expect it to be returned in $v0. Because of this we can simply move the returned value into $a0, that way we can replace the value in $v0 to perform the correct syscall. 
+6. This was done.
+7. This is enough space reserved for 3 integers. It's currently not reserving any integer values in this storage. 
+8. This was done.
+9. This was done.
+10. We would have to save this value because we need to keep track of how large the number is since we're adding up their values at the end. 
+11. This was done.
+12. It'll have a incorrect value for $a0. Therefore we need to restore it to it's original value from when this iteration of the recursion call was made. 
+13. This was done.
+14. This was done.
+15. It is the return address that we first saved when we first called the recursion function. 
