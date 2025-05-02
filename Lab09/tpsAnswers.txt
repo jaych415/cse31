@@ -1,0 +1,164 @@
+TPS 1
+
+1. Download “MIPS_Reference_Sheet” from CatCourses. We will need to refer to this sheet to 
+complete all the exercises in this lab.
+---
+Done
+
+2. Load proc1.s in MARS and study the code. This is similar to compare.s from Lab 06.
+---
+Done
+
+3. After assembling the program, study the Text Segment window and see how your source code is 
+translated into True Assembly Language (Basic) as well as machine code (Code).
+---
+Done
+
+4. In true assembly language, every single instruction can be translated into a machine instruction. How 
+many bits does a machine instruction contain?
+---
+Each machine instruction contains 32 bits. MARS shows the machine code in hexadecimal format with 8 digits.
+This represents 8 x 4 = 32 digits in bit format.
+
+5. To utilize the limited number of bits efficiently, all machine instructions are categorized into different 
+types (or formats). How many types are there? What are they? Give 2 operations for each type as 
+examples.
+---
+There are three different types of machine instructions: R-type, I-type, and J-type.
+R-type: add, sub
+I-type: lw, sw
+J-type: j, jal
+
+6. Now, locate the instruction in line #7 of proc1.s. Let us translate this instruction into machine code.  
+a. What instruction type is this? How many fields does this type of instruction have? What are the
+names of these fields?
+---
+MIPS code: addi $s0, $zero, 25
+Instruction type: I-type
+Number of fields: 4
+Field names: opcode, rs, rt, immediate
+
+b. Refer to the MIPS sheet, what is the value of the opcode of this instruction in hex? What register 
+is rs? What is the value of this register in hex? What register is rt? What is the value of this register 
+in hex? What is the value of immediate in hex?
+---
+opcode of addi in hex: 8
+register rs: $zero aka $0
+value of $zero in hex: 0x0
+register rt: $s0
+value of $s0 in hex: 0x10
+value of immediate in hex: 0x19
+
+c. Construct the machine code of line #7 using the values obtained from part b. Write your answer in 
+both binary and hex formats. You can verify your answer with the Code column in Text Segment 
+window.
+---
+machine code in binary: 0010 0000 0001 0000 0000 0000 0001 1001
+machine code in hex: 0x20100019
+
+7. Now, let us convert a machine code to a MIPS instruction. Locate address 0x00400010 from the Text 
+Segment window.
+a. What is the machine code at this address in hex? Convert this code into binary.
+---
+address 0x00400010 in decimal: 4194320
+address 4194320: line 14 slt $t0, $s1, $s0
+machine code in hex: 0x0230402a
+machine code in binary: 0000 0010 0011 0000 0100 0000 0010 1010
+
+b. From the binary version of this machine code. What is the instruction type? How can you tell? How 
+many fields are there in this instruction type? What are the names of these fields?
+---
+machine code in binary: 000000 10001 10000 01000 00000 101010
+The instruction type is R-type. I can tell this because the first 6 bits are all 0s.
+field names: opcode, rs, rt, rd, shamt, funct
+
+c. According to the binary machine code, what is the value of each field in hex?
+---
+opcode in hex: 0x0
+rs in hex: 0x11
+rt in hex: 0x10
+rd in hex: 0x8
+shamt in hex: 0x0
+funct in hex: 0x2a
+
+d. Refer to the MIPS sheet, what operation is this instruction? How can you tell? What is the mapping 
+of the registers being used in this instruction?
+---
+This instruction is the slt operation. I can tell because the funct field is 2a in hex which the MIPS
+Reference Sheet tells me is slt.
+rs = $s1
+rt = $s0
+rd = $t0
+
+e. What is the final MIPS instruction? Is it the same as the Source Column in the Text Segment 
+window?
+---
+slt $t0, $s1, $s0
+This is the same as the Source Column in the Text Segment
+
+8. Now, let us take a look at line #17 of proc1.s.
+a. What format is this instruction?
+---
+Line 17: bne $t0, $zero, LESS
+This instruction is an I-type instruction.
+
+b. What are the values of opcode, rs, and rt of this instruction in hex?
+---
+opcode in hex: 0x5
+rs in hex: 0x8
+rt in hex: 0x0
+
+c. What is the name of the target label if it takes the branch? What is the address of this label in hex? 
+(Hint: you can find it in the Text Segment window.)
+---
+The target label is called LESS. The address of LESS in hex is 0x40001C
+
+d. So, do we put this address as the value of the immediate field of the instruction? Why?
+---
+No. The immediate stored as the target address is only 16 bits long, not the full 32-bit
+address. Instead, the immediate field stores the offset of the addresses between the next
+instruction and the target label.
+
+e. How do we find the value of the immediate field? What is this value?
+---
+The value of the immediate field is the leftmost 16 bits of the 32-bit instruction.
+0000 0000 0000 0001 = 0x1
+The offset from the instruction after the branch to LESS is only 4 bytes. We can 
+calculate the address by appending 00 to the immediate field and then adding the
+address of PS + 4.
+
+f. What is the machine code of this instruction in binary and hex formats? Does your answer match 
+the Code column in the Text Segment window?
+---
+machine code in binary: 0001 0101 0000 0000 0000 0000 0000 0001
+machine code in hex: 0x15000001
+
+9. Finally, let us convert the j instruction in line #20.
+a. What format is this instruction? How many fields are there in this format?
+---
+This instruction is a J-type.
+This instruction has two fields, opcode and address.
+
+b. What is the opcode of this instruction in hex?
+---
+opcode in hex: 0x2
+
+c. To what label and address does this instruction jump?
+---
+The target label is GREQ at address 0x00400030
+
+d. How many bits can you use in the address field of the instruction? How can we “squeeze” the 
+address into this field? What are the reasons behind this approach? What is the value of the 
+address field in binary?
+---
+The address field can hold 26 bits. We can squeeze the address into this field by removing
+the last two 0s as well as the first four bits, turning a 32-bit address into a 26-bit address.
+The compiler reconstructs the address by appending the two 0s again and then prepending the address
+with the first four bits of the PC, under the assumption that the jump distance is not too big.
+The value of the address field in binary is 0000 0100 0000 0000 0000 0011 00.
+
+e. What is the machine code of this instruction in binary and hex? Is it the same as what’s in the 
+Code Column of the Text Segment window?
+---
+machine code in hex: 0x0810000c
+machine code in binary: 0000 1000 0001 0000 0000 0000 0000 1100
