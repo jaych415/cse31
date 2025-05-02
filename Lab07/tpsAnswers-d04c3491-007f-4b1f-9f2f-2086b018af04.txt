@@ -1,0 +1,22 @@
+Activity #1:
+1. A procedure doesn't return a value, but a function does.  In object-oriented programming, a method is essentially a function that is more specific to a class. 
+ Method vs. function vs. procedure: https://softwareengineering.stackexchange.com/questions/20909
+2. *Completed* 
+3. *Completed* 
+4. The command to jump to line 20 is in line 12.  Line 20 inserts the value into $v0 after adding the registers $a0 and $a1.
+5. I don't think we can use the "j $ra" instruction in this situation because the j op code is meant to read a label, not a register. The instruction "jr $ra" is meant to read an address from a register and jump to that address, while the j op code is meant to read a label and jump to wherever that label is located. 
+6. The return address for this would be saved at line 11. It is saved in register $ra. The value being saved to $ra is 0. This value makes no sense because it doesn't have a meaningful value. 
+7. The program errors. "Error in : invalid program counter value: 0x00000000"
+8. The line after the original jump was called. 
+9. It realistically should be correct, although that has yet to be determined since this question specifically tells me not to execute the code. 
+10. The new return address is: 0x0040001c. The output is 15. 
+11. jal
+12. *Completed*
+
+Activity #2:
+1. The output will be 38. 
+2. It will have an infinite loop. 
+3. The command jal allows the MIPS code to jump to the register specified and then save the return address (the line just after the jal command was called) to the register $ra. Once the jal command was called again within SUM, the original return address was lost with no way of returning to the MAIN function. 
+4. We can simply save the original value of $a0 to the stack using the commands: addi $sp, $sp, 4; sw $a0, 0($sp);
+5. The original value of $s0 (x) is replaced by the value m. This is not necessarily a problem unless the program doesn't properly account for this instruction later, which it appears the code didn't.
+6. *Completed*
