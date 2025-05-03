@@ -1,0 +1,45 @@
+TPS 1
+
+
+  1.​ It prints the hexadecimal representation of 2 (e.g., “2” or “0x2”), because four_ints[0] is
+      initialized to 2.
+  2.​ After the char assignments, printing four_ints[0] will show a new hex value representing
+      the bytes for 'A', 'B', 'C', and 'D' (e.g., “44434241” on a little-endian system).
+  3.​ Inserting the print confirms that four_ints[0] now holds the hex value corresponding to
+      the characters 'A' through 'D', as expected.
+  4.​ Printing four_ints[1] outputs 2 in hex, which is expected since only the first element’s
+      bytes were altered.
+  5.​ ​
+       5a. Only one array, four_ints, is allocated.​
+       5b. Yes; four_c is a char pointer cast from four_ints, so both point to the same memory
+      location.​
+       5c. Printing their addresses (using %p) confirms that four_ints and four_c have identical
+      starting addresses.
+  6.​ A loop shows that consecutive elements of four_ints are 4 bytes apart, reflecting the size
+      of an int.
+  7.​ The diagram would depict four contiguous 4-byte blocks arranged from higher to lower
+      addresses, with four_ints[0] at the rightmost (smallest address) position.
+  8.​ A similar loop for four_c reveals that each element is 1 byte apart, as chars occupy one
+      byte each.
+  9.​ The corresponding diagram for four_c would show 16 consecutive 1-byte blocks
+      representing the individual bytes of the four ints.
+  10.​This comparison illustrates that C’s pointer arithmetic advances by the size of the data
+      type (4 bytes for ints versus 1 byte for chars) when the array index is incremented.
+
+
+TPS 2
+
+
+  1.​ Line #8: It allocates memory for an array of n pointers to int, setting up storage for the
+      rows of the 2D array.
+  2.​ Accessing the ith pointer: You access it using pointer arithmetic as *(arr + i).
+  3.​ This was done in the code.
+  4.​ The size is passed so the function knows how many rows and columns to iterate over
+      since C arrays don’t carry dimension information.
+  5.​ Used nested loops to traverse each row and column, printing each value with formatting
+      that reflects the 2D layout.
+  6.​ Looped through the array and set each diagonal element to 1 (e.g., ((arr + i) + i) = 1),
+      leaving off-diagonals as 0.
+  7.​ Verifying the result: Call printArray(arr, n) to display the diagonal matrix and confirm the
+      modifications.
+
