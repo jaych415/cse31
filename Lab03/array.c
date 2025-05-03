@@ -29,27 +29,15 @@ int* bubbleSort(int arr[], int n) {
 
     // Sorting using pointer notations. i.e. you cannot use "[]"!
     // Your code goes here...
-
-    // Outer loop: performs n-1 passes over the array
-for (i = 0; i < n - 1; i++) {
-           // Inner loop: iterates through the array comparing adjacent elements
-    for (j = 0; j < n - 1; j++) {
-        // Compare the element at position j with the element at position j+1 using pointer arithmetic
-        if (*(s_arr + j) > *(s_arr + j + 1)) {
-            // If the element at j is greater than the one at j+1, swap them:
-            
-            // Store the value at j+1 in a temporary variable
-            temp = *(s_arr + j + 1);
-            
-            // Move the value at j into the position j+1
-            *(s_arr + j + 1) = *(s_arr + j);
-            
-            // Place the value originally at j+1 (stored in temp) into position j
-            *(s_arr + j) = temp;
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1; j++) {
+            if (*(s_arr + j) > *(s_arr + j + 1)) {
+                temp = *(s_arr + j + 1);
+                *(s_arr + j + 1) = *(s_arr + j);
+                *(s_arr + j) = temp;
+            }
         }
     }
-}
-
 
     return s_arr;
 }

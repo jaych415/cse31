@@ -43,12 +43,6 @@ int has_cycle(node *head) {
   return 0;
 }
 
-//The has_cycle function determines whether a singly linked list contains a cycle. 
-//It uses Floyd's Tortoise and Hare algorithm, where two pointers traverse the list at
-//different speeds (one moving one node at a time and the other two nodes at a time).
-//If these pointers meet, it means there's a cycle, so the function returns 1; otherwise, 
-//if the fast pointer reaches the end of the list, it returns 0, indicating no cycle.
-
 void test_has_cycle(void) {
   int i;
   node nodes[25]; //enough to run our tests

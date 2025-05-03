@@ -1,0 +1,23 @@
+TPS 1
+
+    1.​ The three memory pools are the stack (for local variables), the heap (for dynamically
+         allocated memory), and the static/global segment (for global and static variables).
+    2.​ A: There are three variables declared: num, ptr, and handle.
+       ​ B: Two variables are pointers: ptr, which points to an integer array on the heap, and
+       handle, which points to an integer pointer on the heap.
+​        C: All these variables are stored on the stack.
+​        D: In line 12, ptr is set to point to memory allocated on the heap.
+    3.​ This was done in a notebook and drawn out.
+    4.​ Arrows were used to connect them as well.
+
+TPS 2
+
+    1.​ The program defines a Node structure and allocates memory for one Node on the heap
+        then initializes its integer and float values. It sets up a basic node for a linked list,
+        although the next pointer remains the same.
+    2.​ You can add printf statements to print the value of head and the addresses of head,
+        head->iValue, head->fValue, and head->next using the %p format specifier.
+    3.​ The addresses of the structure's members are stored in the same memory, and the
+        pointer head holds the address of the beginning of this block, directly referencing the
+        entire Node structure.
+
